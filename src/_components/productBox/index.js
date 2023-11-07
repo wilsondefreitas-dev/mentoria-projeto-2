@@ -1,36 +1,26 @@
-import productImg from "./prancha.jpeg"
+import productImg from "./prancha.jpeg";
+import "./styles.css";
 
-import './styles.css';
+function ProductBox({addToCart}) {
 
-function productBox() {
-  const odd = true
-  const productTitle = "pranca sharpeye"
-  const imgWidth = 300
-  const label = "adicionar ao carrinho"
+  const productTitle = "pranca sharpeye";
+  const label = "adicionar ao carrinho";
+  const imgWidth = 200;
 
-   
+  //
+
   return (
-
-    
     <div>
-       
       
       <img src={productImg} alt="prancha" width={imgWidth} />
       <h3>{productTitle}</h3>
-      <button>{label}</button>
 
-      {odd==true ?"produto em estoque " : " produto fora de  estoque" }
-      
-      
-       
-        
-       
-      
-      
-      
+      <button onClick={addToCart}>
+        {label}
+      </button>
+
     </div>
   );
 }
 
-
-export default productBox;
+export default ProductBox;
