@@ -1,41 +1,45 @@
 import { useState } from "react";
 import ProductBox from "../productBox";
 
-function ProductsList(){
+function ProductsList() {
 
-    /**
-     * o responsável pelo e-commerce solicitou que não seja vendido mais de 
-     * 3 items por usuário. por isso, precisamos limitar o número de items
-     * que o cliente pode adicionar no carrinho, e também dar a possibilidade
-     * de remover um item do carrinho.
-     * 
-     * TODO:
-     * 
-     * 
-     * 1. passar o estado 'itemsOnCart' pro filho 'ProductBox'
-     * 2. se 'itemsOnCart' for igual ou maior a 3 desativa o botão de adicionar ao carrinho
-     * 3. adicionar um botão pra remover items do carrinho
-     *      3.1 ao clicar, diminui um item do carrinho
-     */
+/**
+ * Agora nós precisamos saber quais items foram adicionados
+ * no carrinho. Iremos usar o recurso de mapear uma array 
+ * para adicionar varios items na lista e também no carrinho.
+ */
 
-    const [itemsOnCart, setItemsOnCart] = useState(0);
+  const [itemsOnCart, setItemsOnCart] = useState(0);
 
-    function handleOnClick(){
+  function handleAddToCart() {
+    const add = itemsOnCart + 1;
+    setItemsOnCart(add);
+  }
 
-        const add = itemsOnCart + 1;
-        setItemsOnCart(add);
+  function handleRemoveItem() {
+    const remove = itemsOnCart - 1;
+    setItemsOnCart(remove);
+  }
 
-    }
+  return (
+    <>
+      <h3>
+        Carrinho: {itemsOnCart} {itemsOnCart === 1 ? "item" : "items"}
+        <ButtonRemove itemsOnCart={itemsOnCart} handleRemoveItem={handleRemoveItem}/>
+      </h3>
+      <ProductBox itemsOnCart={itemsOnCart} addToCart={handleAddToCart} />
+    </>
+  );
+}
 
-    return(
-        <>
-            <h3>
-                Carrinho: {itemsOnCart} {itemsOnCart === 1 ? 'item' : 'items'}
-            </h3>
-            <ProductBox itemsOnCart={itemsOnCart} addToCart={handleOnClick}/>
-        </>
-    );
+function ButtonRemove({itemsOnCart, handleRemoveItem}) {
 
+const removeItemsButtonDisabled = (itemsOnCart === 0);
+  return (
+    <button disabled={removeItemsButtonDisabled} onClick={handleRemoveItem}>
+      Remover item
+    </button>
+  );
 }
 
 export default ProductsList;
