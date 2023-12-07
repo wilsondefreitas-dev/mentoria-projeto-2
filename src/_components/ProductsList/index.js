@@ -32,7 +32,7 @@ function ProductsList(){
             <h3>
                 Carrinho: {itemsOnCart} {itemsOnCart === 1 ? 'item' : 'items'}
             </h3>
-            <ProductBox addToCart={handleOnClick}/>
+0            <ProductBox itemsOnCart={itemsOnCart} addToCart={handleOnClick}/>
         </>
     );
 
