@@ -1,0 +1,1 @@
+export const MAX_ITEMS_ALLOWED_ON_CART = 3;
