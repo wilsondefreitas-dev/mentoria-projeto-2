@@ -1,11 +1,11 @@
 import { useState } from "react";
 import ProductBox from "../productBox";
+import { PRODUCTS_LIST_MOCK } from "../../utils/mockdata";
 
 function ProductsList() {
   /**
-   * Agora nós precisamos saber quais items foram adicionados
-   * no carrinho. Iremos usar o recurso de mapear uma array
-   * para adicionar varios items na lista e também no carrinho.
+   * Agora nós precisamos usar o recurso de mapear uma array
+   * para adicionar varios items no carrinho.
    */
 
   const [itemsOnCart, setItemsOnCart] = useState(0);
@@ -29,7 +29,14 @@ function ProductsList() {
           handleRemoveItem={handleRemoveItem}
         />
       </h3>
-      <ProductBox itemsOnCart={itemsOnCart} addToCart={handleAddToCart} />
+
+      <div style={{display: 'flex', gap: '15px'}}>
+      {
+        PRODUCTS_LIST_MOCK.map((product) => 
+          <ProductBox itemsOnCart={itemsOnCart} addToCart={handleAddToCart} product={product}/>
+        ) 
+      }
+      </div>
     </>
   );
 }
