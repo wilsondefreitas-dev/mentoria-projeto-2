@@ -14,19 +14,8 @@ function ProductBox({itemsOnCart, addToCart, product}) {
 
   const arrayDetails = Object.keys(details); //cria uma array com as keys do objeto
 
-  /*
-  
-    - usar o map na arrayDetayls
-    - inserir os valores corretamente no componente Details
-    - finalizar o componente Details
-    - renderizar todos os detalhes na tela
-
-    NOTA: (referência no productsList)
-
-  */
-
   console.log(details);
-  console.log(arrayDetails);
+  console.log({arrayDetails});
 
   return (
     <div>
@@ -37,7 +26,9 @@ function ProductBox({itemsOnCart, addToCart, product}) {
       <p>R$ {preco}</p>
       
       <div>
-        {/* inserir aqui um map com os detalhes */}
+        {
+          arrayDetails.map((label) => <Details label={label} value={details[label]}/>)
+        }
       </div>
 
       <button onClick={addToCart} disabled={buttonDisabled}>
@@ -49,6 +40,10 @@ function ProductBox({itemsOnCart, addToCart, product}) {
 }
 
 const Details = ({label, value}) => {
+  
+  return(
+      <p><b>{label}:</b> {value}</p>
+  )
 
 }
 
