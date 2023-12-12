@@ -3,32 +3,60 @@ import ProductBox from "../productBox";
 import { PRODUCTS_LIST_MOCK } from "../../utils/mockdata";
 
 function ProductsList() {
-  /**
-   * Agora nós precisamos usar o recurso de mapear uma array
-   * para adicionar varios items no carrinho.
-   */
 
-  const [itemsOnCart, setItemsOnCart] = useState(0);
+  const [cart, setCart] = useState([]);
+  const itemsOnCart = cart.length;
 
-  function handleAddToCart() {
-    const add = itemsOnCart + 1;
-    setItemsOnCart(add);
+  function handleAddToCart(product) {
+
+    const temporaryCart = [...cart];
+    temporaryCart.push(product);
+    setCart(temporaryCart);
+
   }
 
   function handleRemoveItem() {
-    const remove = itemsOnCart - 1;
-    setItemsOnCart(remove);
+
+    const temporaryCart = [...cart];
+    temporaryCart.pop();
+    setCart(temporaryCart);
+
+  }
+
+  function getSubtotal(){
+
+    /**
+     * pegar item por item (esta no cart)
+     * acessar valor dele (iterar o cart)
+     * e somar todos (somar em uma variavel)
+     */
+
+    return 0;
+
   }
 
   return (
     <>
-      <h3>
-        Carrinho: {itemsOnCart} {itemsOnCart === 1 ? "item" : "items"}
+      <div>
+
+        <h3>Carrinho: {itemsOnCart} {itemsOnCart === 1 ? "item" : "items"}</h3>
+
+        <div>
+          {
+            cart.map((product) => <ProductOnCart name={product.name} preco={product.preco}/>)
+          }          
+        </div>
+
+        <p><b>Total:</b> R$ {getSubtotal()}</p>
+
         <ButtonRemove
           itemsOnCart={itemsOnCart}
           handleRemoveItem={handleRemoveItem}
         />
-      </h3>
+
+      </div>
+
+      <hr/>
 
       <div style={{display: 'flex', gap: '15px'}}>
       {
@@ -39,6 +67,14 @@ function ProductsList() {
       </div>
     </>
   );
+}
+
+function ProductOnCart({name, preco}){
+
+  return(
+    <p><button disabled={true}>X</button> | <b>{name}</b> - R$ <i>{preco}</i></p>
+  )
+
 }
 
 function ButtonRemove({ itemsOnCart, handleRemoveItem }) {

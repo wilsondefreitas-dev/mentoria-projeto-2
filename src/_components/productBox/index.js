@@ -14,12 +14,9 @@ function ProductBox({itemsOnCart, addToCart, product}) {
 
   const arrayDetails = Object.keys(details); //cria uma array com as keys do objeto
 
-  console.log(details);
-  console.log({arrayDetails});
-
   return (
     <div>
-      
+            
       <img src={productImg} alt="prancha" width={imgWidth} />
       <h3>{name}</h3>
       <p>{marca}</p>
@@ -31,7 +28,7 @@ function ProductBox({itemsOnCart, addToCart, product}) {
         }
       </div>
 
-      <button onClick={addToCart} disabled={buttonDisabled}>
+      <button onClick={() => addToCart(product)} disabled={buttonDisabled}>
         {label}
       </button>
 
